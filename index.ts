@@ -1,10 +1,16 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
-
 dotenv.config({ path: "./config/.env" });
+import "./config/db";
+import userRoutes from "./routes/user.routes";
 
 const app: Express = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+//Routes
+app.use("/api/user", userRoutes);
+//server
 app.listen(process.env.PORT, () => {
   console.log(`⚡️[server]: Listening on port ${process.env.PORT}`);
 });

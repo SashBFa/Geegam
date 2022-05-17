@@ -6,7 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: "./config/.env" });
+require("./config/db");
+const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+//Routes
+app.use("/api/user", user_routes_1.default);
+//server
 app.listen(process.env.PORT, () => {
     console.log(`⚡️[server]: Listening on port ${process.env.PORT}`);
 });
