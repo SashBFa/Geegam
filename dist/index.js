@@ -8,9 +8,11 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: "./config/.env" });
 require("./config/db");
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+app.use((0, cookie_parser_1.default)());
 //Routes
 app.use("/api/user", user_routes_1.default);
 //server

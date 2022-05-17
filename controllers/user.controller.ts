@@ -10,6 +10,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const userInfo = (req: Request, res: Response) => {
   if (!Types.ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
+
   UserModel.findById(req.params.id, (err: string, docs: string) => {
     !err ? res.status(200).send(docs) : res.status(400).send({ message: err });
   }).select("-password");

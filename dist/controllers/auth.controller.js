@@ -12,8 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUp = void 0;
+exports.signIn = exports.signUp = void 0;
 const user_model_1 = __importDefault(require("./../models/user.model"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const maxAge = 3 * 21 * 60 * 60 * 1000;
+const createToken = (id) => {
+    return jsonwebtoken_1.default.sign({ id }, process.env.TOKEN_SECRET, {
+        expiresIn: maxAge,
+    });
+};
 const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { pseudo, email, password } = req.body;
     try {
@@ -21,8 +28,21 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(201).send({ user: user._id });
     }
     catch (err) {
-        res.status(200).send({ err });
+        res.status(400).send({ err });
     }
 });
 exports.signUp = signUp;
+const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    try {
+        const user = yield user_model_1.default.login(email, password);
+        const token = createToken(user._id);
+        res.cookie("jwt", token, { httpOnly: true, maxAge });
+        res.status(200).json({ user: user._id });
+    }
+    catch (err) {
+        res.status(400).send({ err });
+    }
+});
+exports.signIn = signIn;
 //# sourceMappingURL=auth.controller.js.map

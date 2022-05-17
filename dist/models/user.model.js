@@ -88,6 +88,19 @@ userSchema.pre("save", function (next) {
         next();
     });
 });
+userSchema.statics.login = function (email, password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield this.findOne({ email });
+        if (user) {
+            const auth = yield bcrypt_1.default.compare(password, user.password);
+            if (auth) {
+                return user;
+            }
+            throw Error("incorrect password");
+        }
+        throw Error("incorrect email");
+    });
+};
 const UserModel = mongoose_1.default.model("user", userSchema);
 exports.default = UserModel;
 //# sourceMappingURL=user.model.js.map
