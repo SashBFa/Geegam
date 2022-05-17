@@ -1,8 +1,25 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 import isEmail from "validator/lib/isEmail";
 import bcrypt from "bcrypt";
 
-const userSchema = new Schema(
+interface IUser {
+  pseudo: string;
+  email: string;
+  password: string;
+  picture: string;
+  bio: string;
+  followers: [string];
+  following: [string];
+  likes: [string];
+}
+
+interface IUserDocument extends IUser, Document {}
+
+interface IUserModel extends Model<IUserDocument> {
+  login: (email: string, password: string) => Promise<IUserDocument>;
+}
+
+const userSchema: Schema<IUserDocument> = new Schema(
   {
     pseudo: {
       type: String,
@@ -54,7 +71,7 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.statics.login = async function (email, password) {
+userSchema.statics.login = async function (email: string, password: string) {
   const user = await this.findOne({ email });
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
@@ -66,6 +83,6 @@ userSchema.statics.login = async function (email, password) {
   throw Error("incorrect email");
 };
 
-const UserModel = mongoose.model("user", userSchema);
+const UserModel = mongoose.model<IUserDocument, IUserModel>("user", userSchema);
 
 export default UserModel;
