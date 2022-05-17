@@ -18,7 +18,7 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { pseudo, email, password } = req.body;
     try {
         const user = yield user_model_1.default.create({ pseudo, email, password });
-        res.status(201).json({ user: user._id });
+        res.status(201).send({ user: user._id });
     }
     catch (err) {
         res.status(200).send({ err });

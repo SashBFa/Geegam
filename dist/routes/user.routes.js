@@ -25,7 +25,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const rtr = __importStar(require("express"));
 const authController = __importStar(require("./../controllers/auth.controller"));
+const userController = __importStar(require("./../controllers/user.controller"));
 const router = rtr.Router();
+//auth
 router.post("/register", authController.signUp);
+//user DB
+router.get("/", userController.getAllUsers);
+router.get("/:id", userController.userInfo);
+router.put("/:id", userController.updateUser);
+router.delete("/:id", userController.deleteUser);
+router.patch("/follow/:id", userController.follow);
+router.patch("/unfollow/:id", userController.unfollow);
 exports.default = router;
 //# sourceMappingURL=user.routes.js.map
