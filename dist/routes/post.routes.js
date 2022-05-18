@@ -27,24 +27,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rtr = __importStar(require("express"));
-const authController = __importStar(require("./../controllers/auth.controller"));
-const userController = __importStar(require("./../controllers/user.controller"));
-const uploadController = __importStar(require("./../controllers/upload.controller"));
+const postController = __importStar(require("./../controllers/post.controller"));
 const multer_1 = __importDefault(require("multer"));
 const router = rtr.Router();
 const upload = (0, multer_1.default)();
-//auth
-router.post("/register", authController.signUp);
-router.post("/login", authController.signIn);
-router.get("/logout", authController.logout);
-//user DB
-router.get("/", userController.getAllUsers);
-router.get("/:id", userController.userInfo);
-router.put("/:id", userController.updateUser);
-router.delete("/:id", userController.deleteUser);
-router.patch("/follow/:id", userController.follow);
-router.patch("/unfollow/:id", userController.unfollow);
-//upload
-router.post("/upload", upload.single("file"), uploadController.uploadProfil);
+router.get("/", postController.readPost);
+router.post("/", upload.single("file"), postController.createPost);
+router.put("/:id", postController.updatePost);
+router.delete("/:id", postController.deletePost);
+router.patch("/like-post/:id", postController.likePost);
+router.patch("/unlike-post/:id", postController.unlikePost);
+//comments
+router.patch("/comment-post/:id", postController.commentPost);
+router.patch("/edit-comment-post/:id", postController.editCommentPost);
+router.patch("/delete-comment-post/:id", postController.deleteCommentPost);
 exports.default = router;
-//# sourceMappingURL=user.routes.js.map
+//# sourceMappingURL=post.routes.js.map

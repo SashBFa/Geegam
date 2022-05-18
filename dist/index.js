@@ -8,7 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config({ path: "./config/.env" });
 require("./config/db");
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
-// import postRoutes from "./routes/post.routes";
+const post_routes_1 = __importDefault(require("./routes/post.routes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const cors_1 = __importDefault(require("cors"));
@@ -32,7 +32,7 @@ app.get("/jwtid", auth_middleware_1.requireAuth, (req, res) => {
 });
 //Routes
 app.use("/api/user", user_routes_1.default);
-// app.use("/api/post", postRoutes);
+app.use("/api/post", post_routes_1.default);
 //server
 app.listen(process.env.PORT, () => {
     console.log(`⚡️[server]: Listening on port ${process.env.PORT}`);

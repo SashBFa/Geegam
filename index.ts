@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config/.env" });
 import "./config/db";
 import userRoutes from "./routes/user.routes";
-// import postRoutes from "./routes/post.routes";
+import postRoutes from "./routes/post.routes";
 import cookieParser from "cookie-parser";
 import { checkUser, requireAuth } from "./middleware/auth.middleware";
 import cors from "cors";
@@ -31,7 +31,7 @@ app.get("/jwtid", requireAuth, (req, res) => {
 
 //Routes
 app.use("/api/user", userRoutes);
-// app.use("/api/post", postRoutes);
+app.use("/api/post", postRoutes);
 
 //server
 app.listen(process.env.PORT, () => {

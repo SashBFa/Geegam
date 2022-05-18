@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UserModel from "./../models/user.model";
 import jwt from "jsonwebtoken";
+import { signUpErrors, signInErrors } from "./../utils/errors.utils";
 
 const maxAge = 3 * 21 * 60 * 60 * 1000;
 const createToken = (id: string) => {
@@ -15,7 +16,8 @@ export const signUp = async (req: Request, res: Response) => {
     const user = await UserModel.create({ pseudo, email, password });
     res.status(201).send({ user: user._id });
   } catch (err) {
-    res.status(400).send({ err });
+    const errors = signUpErrors(err);
+    res.status(400).send({ errors });
   }
 };
 export const signIn = async (req: Request, res: Response) => {
@@ -27,7 +29,8 @@ export const signIn = async (req: Request, res: Response) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge });
     res.status(200).json({ user: user._id });
   } catch (err) {
-    res.status(400).send({ err });
+    const errors = signInErrors(err);
+    res.status(400).send({ errors });
   }
 };
 
