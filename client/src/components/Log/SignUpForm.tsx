@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const SignUpForm = () => {
@@ -6,7 +7,48 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [controlPassword, setControlPassword] = useState("");
 
-  const handleRegister = async (e: React.MouseEvent<HTMLFormElement>) => {};
+  const handleRegister = async (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const terms = document.getElementById("terms") as HTMLInputElement;
+    const pseudoError = document.querySelector(".pseudo.error")!;
+    const emailError = document.querySelector(".email.error")!;
+    const passwordError = document.querySelector(".password.error")!;
+    const passwordConfirmError = document.querySelector(
+      ".password-confirm.error"
+    )!;
+    const termsError = document.querySelector(".terms.error")!;
+
+    passwordConfirmError.innerHTML = "";
+    termsError.innerHTML = "";
+
+    if (password !== controlPassword || !terms.checked) {
+      if (password !== controlPassword) {
+        passwordConfirmError.innerHTML =
+          "les mots de passe ne correspondent pas";
+      }
+      if (!terms.checked) {
+        termsError.innerHTML = "veuillez valider les conditions generales";
+      }
+    } else {
+      await axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}api/user/register`,
+        data: {
+          pseudo,
+          email,
+          password,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          pseudoError.innerHTML = err.response.data.errors.pseudo;
+          emailError.innerHTML = err.response.data.errors.email;
+          passwordError.innerHTML = err.response.data.errors.password;
+        });
+    }
+  };
   return (
     <form action="" onSubmit={handleRegister} id="sign-up-form">
       <label htmlFor="pseudo">Pseudo</label>
