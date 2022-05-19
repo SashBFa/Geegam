@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
+import SignInForm from "./SignInForm";
 
 const SignUpForm = () => {
+  const [formSubmit, setFormSubmit] = useState(false);
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +42,7 @@ const SignUpForm = () => {
         },
       })
         .then((res) => {
-          console.log(res);
+          setFormSubmit(true);
         })
         .catch((err) => {
           pseudoError.innerHTML = err.response.data.errors.pseudo;
@@ -50,62 +52,74 @@ const SignUpForm = () => {
     }
   };
   return (
-    <form action="" onSubmit={handleRegister} id="sign-up-form">
-      <label htmlFor="pseudo">Pseudo</label>
-      <br />
-      <input
-        type="text"
-        name="pseudo"
-        id="pseudo"
-        onChange={(e) => setPseudo(e.target.value)}
-        value={pseudo}
-      />
-      <div className="pseudo error"></div>
-      <br />
-      <label htmlFor="email">Email</label>
-      <br />
-      <input
-        type="text"
-        name="email"
-        id="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-      <div className="email error"></div>
-      <br />
-      <label htmlFor="password">Password</label>
-      <br />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <div className="password error"></div>
-      <br />
-      <label htmlFor="password-conf">Control Password</label>
-      <br />
-      <input
-        type="password"
-        name="password-conf"
-        id="password-conf"
-        onChange={(e) => setControlPassword(e.target.value)}
-        value={controlPassword}
-      />
-      <div className="password-confirm error"></div>
-      <br />
-      <input type="checkbox" id="terms" />
-      <label htmlFor="terms">
-        I accept terms{" "}
-        <a href="/" target="_blank" rel="noopener noreferrer">
-          GCD
-        </a>
-      </label>
-      <div className="terms error"></div>
-      <br />
-      <input type="submit" value="Valider inscription" />
-    </form>
+    <>
+      {formSubmit ? (
+        <>
+          <SignInForm />
+          <span></span>
+          <h4 className="success">
+            Enregistrement reussi, veuillez vous connecter
+          </h4>
+        </>
+      ) : (
+        <form action="" onSubmit={handleRegister} id="sign-up-form">
+          <label htmlFor="pseudo">Pseudo</label>
+          <br />
+          <input
+            type="text"
+            name="pseudo"
+            id="pseudo"
+            onChange={(e) => setPseudo(e.target.value)}
+            value={pseudo}
+          />
+          <div className="pseudo error"></div>
+          <br />
+          <label htmlFor="email">Email</label>
+          <br />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <div className="email error"></div>
+          <br />
+          <label htmlFor="password">Password</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <div className="password error"></div>
+          <br />
+          <label htmlFor="password-conf">Control Password</label>
+          <br />
+          <input
+            type="password"
+            name="password-conf"
+            id="password-conf"
+            onChange={(e) => setControlPassword(e.target.value)}
+            value={controlPassword}
+          />
+          <div className="password-confirm error"></div>
+          <br />
+          <input type="checkbox" id="terms" />
+          <label htmlFor="terms">
+            I accept terms{" "}
+            <a href="/" target="_blank" rel="noopener noreferrer">
+              GCD
+            </a>
+          </label>
+          <div className="terms error"></div>
+          <br />
+          <input type="submit" value="Valider inscription" />
+        </form>
+      )}
+    </>
   );
 };
 
