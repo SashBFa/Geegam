@@ -37,7 +37,6 @@ const storage = multer_1.default.diskStorage({
         cb(null, `./client/public/uploads/profil/`);
     },
     filename: function (req, file, cb) {
-        console.log(req);
         cb(null, req.body.name + ".jpg");
     },
 });

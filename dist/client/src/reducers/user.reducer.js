@@ -8,6 +8,8 @@ function userReducer(state = initialState, action) {
             return action.payload;
         case user_actions_1.UPLOAD_PICTURE:
             return Object.assign(Object.assign({}, state), { picture: action.payload });
+        case user_actions_1.UPDATE_BIO:
+            return Object.assign(Object.assign({}, state), { bio: action.payload });
         default:
             return state;
     }

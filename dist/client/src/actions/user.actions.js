@@ -3,10 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadPicture = exports.getUser = exports.UPLOAD_PICTURE = exports.GET_USER = void 0;
+exports.updateBio = exports.uploadPicture = exports.getUser = exports.UPDATE_BIO = exports.UPLOAD_PICTURE = exports.GET_USER = void 0;
 const axios_1 = __importDefault(require("axios"));
 exports.GET_USER = "GET_USER";
 exports.UPLOAD_PICTURE = "UPLOAD_PICTURE";
+exports.UPDATE_BIO = "UPDATE_BIO";
 const getUser = (uid) => {
     return (dispatch) => {
         return axios_1.default
@@ -34,4 +35,18 @@ const uploadPicture = (data, id) => {
     };
 };
 exports.uploadPicture = uploadPicture;
+const updateBio = (userId, bio) => {
+    return (dispatch) => {
+        return axios_1.default
+            .put(`${process.env.REACT_APP_API_URL}api/user/` + userId, bio)
+            .then((res) => {
+            dispatch({
+                type: exports.UPDATE_BIO,
+                payload: bio,
+            });
+        })
+            .catch((err) => console.log(err));
+    };
+};
+exports.updateBio = updateBio;
 //# sourceMappingURL=user.actions.js.map
