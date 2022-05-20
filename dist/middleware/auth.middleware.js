@@ -21,7 +21,7 @@ const checkUser = (req, res, next) => {
         jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => __awaiter(void 0, void 0, void 0, function* () {
             if (err) {
                 res.locals.user = null;
-                res.cookie("jwt", "", { maxAge: 1 });
+                // res.cookie("jwt", "", { maxAge: 1 });
                 next();
             }
             else {

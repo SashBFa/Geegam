@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importDefault(require("react"));
+const jsx_runtime_1 = require("react/jsx-runtime");
 const axios_1 = __importDefault(require("axios"));
 const js_cookie_1 = __importDefault(require("js-cookie"));
 const Logout = () => {
@@ -35,9 +35,7 @@ const Logout = () => {
         });
         window.location.href = "/";
     });
-    return (<li onClick={logout}>
-      <img src="./img/icons/logout.svg" alt="logout"/>
-    </li>);
+    return ((0, jsx_runtime_1.jsx)("li", Object.assign({ onClick: logout }, { children: (0, jsx_runtime_1.jsx)("img", { src: "./img/icons/logout.svg", alt: "logout" }) })));
 };
 exports.default = Logout;
 //# sourceMappingURL=Logout.js.map

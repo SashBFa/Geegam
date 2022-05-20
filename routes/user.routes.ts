@@ -5,7 +5,17 @@ import * as uploadController from "./../controllers/upload.controller";
 import multer from "multer";
 
 const router = rtr.Router();
-const upload = multer();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, `./client/public/uploads/profil/`);
+  },
+  filename: function (req, file, cb) {
+    console.log(req);
+
+    cb(null, req.body.name + ".jpg");
+  },
+});
+const upload = multer({ storage: storage });
 
 //auth
 router.post("/register", authController.signUp);

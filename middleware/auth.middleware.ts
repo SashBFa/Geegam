@@ -11,7 +11,7 @@ export const checkUser = (req: Request, res: Response, next: () => void) => {
       async (err: any, decodedToken: { id: any }) => {
         if (err) {
           res.locals.user = null;
-          res.cookie("jwt", "", { maxAge: 1 });
+          // res.cookie("jwt", "", { maxAge: 1 });
           next();
         } else {
           let user = await UserModel.findById(decodedToken.id);

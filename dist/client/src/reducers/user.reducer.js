@@ -6,6 +6,8 @@ function userReducer(state = initialState, action) {
     switch (action.type) {
         case user_actions_1.GET_USER:
             return action.payload;
+        case user_actions_1.UPLOAD_PICTURE:
+            return Object.assign(Object.assign({}, state), { picture: action.payload });
         default:
             return state;
     }

@@ -32,7 +32,16 @@ const userController = __importStar(require("./../controllers/user.controller"))
 const uploadController = __importStar(require("./../controllers/upload.controller"));
 const multer_1 = __importDefault(require("multer"));
 const router = rtr.Router();
-const upload = (0, multer_1.default)();
+const storage = multer_1.default.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, `./client/public/uploads/profil/`);
+    },
+    filename: function (req, file, cb) {
+        console.log(req);
+        cb(null, req.body.name + ".jpg");
+    },
+});
+const upload = (0, multer_1.default)({ storage: storage });
 //auth
 router.post("/register", authController.signUp);
 router.post("/login", authController.signIn);

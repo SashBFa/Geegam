@@ -1,32 +1,10 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = __importStar(require("react"));
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
 const axios_1 = __importDefault(require("axios"));
 const SignInForm = () => {
     const [email, setEmail] = (0, react_1.useState)("");
@@ -52,19 +30,7 @@ const SignInForm = () => {
             passwordError.innerHTML = err.response.data.errors.password;
         });
     };
-    return (<form action="" onSubmit={handleLogin} id="sign-up-form">
-      <label htmlFor="email">Email</label>
-      <br />
-      <input type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
-      <div className="email error"></div>
-      <br />
-      <label htmlFor="password">Password</label>
-      <br />
-      <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-      <div className="password error"></div>
-      <br />
-      <input type="submit" value="Se connecter"/>
-    </form>);
+    return ((0, jsx_runtime_1.jsxs)("form", Object.assign({ action: "", onSubmit: handleLogin, id: "sign-up-form" }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "email" }, { children: "Email" })), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "text", name: "email", id: "email", onChange: (e) => setEmail(e.target.value), value: email }), (0, jsx_runtime_1.jsx)("div", { className: "email error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "password" }, { children: "Password" })), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "password", name: "password", id: "password", onChange: (e) => setPassword(e.target.value), value: password }), (0, jsx_runtime_1.jsx)("div", { className: "password error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "submit", value: "Se connecter" })] })));
 };
 exports.default = SignInForm;
 //# sourceMappingURL=SignInForm.js.map

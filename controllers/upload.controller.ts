@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
-import fs from "fs";
-import { promisify } from "util";
 import UserModel from "./../models/user.model";
 import { uploadErrors } from "./../utils/errors.utils";
-
-const pipeline = promisify(require("stream").pipeline);
 
 export const uploadProfil = async (req: Request, res: Response) => {
   try {
@@ -22,12 +18,6 @@ export const uploadProfil = async (req: Request, res: Response) => {
   }
   const fileName = req.body.name + ".jpg";
 
-  await pipeline(
-    req.file.stream,
-    fs.createWriteStream(
-      `${__dirname}/../client/public/uploads/profil/${fileName}`
-    )
-  );
   try {
     await UserModel.findByIdAndUpdate(
       req.body.userId,

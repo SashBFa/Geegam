@@ -1,27 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const jsx_runtime_1 = require("react/jsx-runtime");
 const axios_1 = __importDefault(require("axios"));
-const react_1 = __importStar(require("react"));
+const react_1 = require("react");
 const SignInForm_1 = __importDefault(require("./SignInForm"));
 const SignUpForm = () => {
     const [formSubmit, setFormSubmit] = (0, react_1.useState)(false);
@@ -83,46 +61,7 @@ const SignUpForm = () => {
             });
         }
     });
-    return (<>
-      {formSubmit ? (<>
-          <SignInForm_1.default />
-          <span></span>
-          <h4 className="success">
-            Enregistrement reussi, veuillez vous connecter
-          </h4>
-        </>) : (<form action="" onSubmit={handleRegister} id="sign-up-form">
-          <label htmlFor="pseudo">Pseudo</label>
-          <br />
-          <input type="text" name="pseudo" id="pseudo" onChange={(e) => setPseudo(e.target.value)} value={pseudo}/>
-          <div className="pseudo error"></div>
-          <br />
-          <label htmlFor="email">Email</label>
-          <br />
-          <input type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
-          <div className="email error"></div>
-          <br />
-          <label htmlFor="password">Password</label>
-          <br />
-          <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-          <div className="password error"></div>
-          <br />
-          <label htmlFor="password-conf">Control Password</label>
-          <br />
-          <input type="password" name="password-conf" id="password-conf" onChange={(e) => setControlPassword(e.target.value)} value={controlPassword}/>
-          <div className="password-confirm error"></div>
-          <br />
-          <input type="checkbox" id="terms"/>
-          <label htmlFor="terms">
-            I accept terms{" "}
-            <a href="/" target="_blank" rel="noopener noreferrer">
-              GCD
-            </a>
-          </label>
-          <div className="terms error"></div>
-          <br />
-          <input type="submit" value="Valider inscription"/>
-        </form>)}
-    </>);
+    return ((0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: formSubmit ? ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsx)(SignInForm_1.default, {}), (0, jsx_runtime_1.jsx)("span", {}), (0, jsx_runtime_1.jsx)("h4", Object.assign({ className: "success" }, { children: "Enregistrement reussi, veuillez vous connecter" }))] })) : ((0, jsx_runtime_1.jsxs)("form", Object.assign({ action: "", onSubmit: handleRegister, id: "sign-up-form" }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "pseudo" }, { children: "Pseudo" })), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "text", name: "pseudo", id: "pseudo", onChange: (e) => setPseudo(e.target.value), value: pseudo }), (0, jsx_runtime_1.jsx)("div", { className: "pseudo error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "email" }, { children: "Email" })), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "text", name: "email", id: "email", onChange: (e) => setEmail(e.target.value), value: email }), (0, jsx_runtime_1.jsx)("div", { className: "email error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "password" }, { children: "Password" })), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "password", name: "password", id: "password", onChange: (e) => setPassword(e.target.value), value: password }), (0, jsx_runtime_1.jsx)("div", { className: "password error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "password-conf" }, { children: "Control Password" })), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "password", name: "password-conf", id: "password-conf", onChange: (e) => setControlPassword(e.target.value), value: controlPassword }), (0, jsx_runtime_1.jsx)("div", { className: "password-confirm error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "checkbox", id: "terms" }), (0, jsx_runtime_1.jsxs)("label", Object.assign({ htmlFor: "terms" }, { children: ["I accept terms", " ", (0, jsx_runtime_1.jsx)("a", Object.assign({ href: "/", target: "_blank", rel: "noopener noreferrer" }, { children: "GCD" }))] })), (0, jsx_runtime_1.jsx)("div", { className: "terms error" }), (0, jsx_runtime_1.jsx)("br", {}), (0, jsx_runtime_1.jsx)("input", { type: "submit", value: "Valider inscription" })] }))) }));
 };
 exports.default = SignUpForm;
 //# sourceMappingURL=SignUpForm.js.map

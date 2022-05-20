@@ -13,11 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadProfil = void 0;
-const fs_1 = __importDefault(require("fs"));
-const util_1 = require("util");
 const user_model_1 = __importDefault(require("./../models/user.model"));
 const errors_utils_1 = require("./../utils/errors.utils");
-const pipeline = (0, util_1.promisify)(require("stream").pipeline);
 const uploadProfil = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (req.file.mimetype != "image/jpg" &&
@@ -32,7 +29,6 @@ const uploadProfil = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         return res.status(201).json({ errors });
     }
     const fileName = req.body.name + ".jpg";
-    yield pipeline(req.file.stream, fs_1.default.createWriteStream(`${__dirname}/../client/public/uploads/profil/${fileName}`));
     try {
         yield user_model_1.default.findByIdAndUpdate(req.body.userId, { $set: { picture: "./uploads/profil/" + fileName } }, { new: true, upsert: true, setDefaultsOnInsert: true })
             .then((docs) => res.status(201).send(docs))
